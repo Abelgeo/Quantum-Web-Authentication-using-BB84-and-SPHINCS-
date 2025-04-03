@@ -17,10 +17,10 @@ def generate_quantum_hash():
     circuit = QuantumCircuit(8, 8)  # 8 qubits, 8 classical bits
     circuit.h(range(8))  # Apply Hadamard gate for superposition
     circuit.barrier()
-    circuit.cx(0, 1)  # Entangle qubits 0 and 1
-    circuit.cx(2, 3)  # Entangle qubits 2 and 3
-    circuit.cx(4, 5)  # Entangle qubits 4 and 5
-    circuit.cx(6, 7)  # Entangle qubits 6 and 7
+    circuit.cx(0, 1)  
+    circuit.cx(2, 3)  
+    circuit.cx(4, 5)  
+    circuit.cx(6, 7)  
     circuit.barrier()
     circuit.h(range(8))  # Apply Hadamard gate again for interference
     circuit.measure_all()
@@ -142,7 +142,7 @@ def verify_signature(signature, password, salt, quantum_hash, shared_key):
         print(f"Verification failed: {e}")
         return False
 
-# Example Usage
+# eg:
 if __name__ == "__main__":
     password = "securepassword123"
     pub_key, sig, salt, q_hash, shared_key = generate_signature(password)
