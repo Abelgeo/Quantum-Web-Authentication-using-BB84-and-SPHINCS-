@@ -10,6 +10,7 @@ user_data = {}
 
 @app.route('/')
 def landing():
+    
     """Landing page with options to sign up or sign in."""
     return render_template('landing.html')
 

@@ -2,26 +2,231 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Sign In</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quantum Sign In</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Roboto:wght@300;400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --quantum-blue: #0ff0fc;
+            --quantum-purple: #9d4edd;
+            --dark-space: #0d0d1a;
+            --neon-pink: #ff2a6d;
+            --particle-glow: rgba(157, 78, 221, 0.7);
+        }
+        
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Roboto', sans-serif;
+            background-color: var(--dark-space);
+            color: white;
+            overflow: hidden;
+            position: relative;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .quantum-particle {
+            position: absolute;
+            width: 3px;
+            height: 3px;
+            background-color: var(--quantum-blue);
+            border-radius: 50%;
+            filter: blur(1px);
+            animation: float 15s infinite linear;
+            opacity: 0.6;
+        }
+        
+        @keyframes float {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(var(--tx), var(--ty)); }
+        }
+        
+        .container {
+            position: relative;
+            z-index: 10;
+            width: 400px;
+            padding: 2.5rem;
+            background: rgba(13, 13, 26, 0.8);
+            border-radius: 15px;
+            box-shadow: 0 0 30px var(--particle-glow);
+            backdrop-filter: blur(5px);
+            border: 1px solid var(--quantum-purple);
+        }
+        
+        h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            color: var(--quantum-blue);
+            text-shadow: 0 0 10px var(--quantum-blue);
+            letter-spacing: 2px;
+            text-align: center;
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--quantum-blue);
+            font-size: 0.9rem;
+        }
+        
+        input {
+            width: 100%;
+            padding: 0.8rem;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid var(--quantum-purple);
+            border-radius: 5px;
+            color: white;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+        
+        input:focus {
+            outline: none;
+            border-color: var(--quantum-blue);
+            box-shadow: 0 0 10px var(--quantum-blue);
+        }
+        
+        .btn {
+            width: 100%;
+            padding: 1rem;
+            font-family: 'Orbitron', sans-serif;
+            background: linear-gradient(135deg, var(--quantum-purple), #6a3093);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            margin-top: 1rem;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px var(--particle-glow);
+        }
+        
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: 0.5s;
+        }
+        
+        .btn:hover::before {
+            left: 100%;
+        }
+        
+        .signup-link {
+            text-align: center;
+            margin-top: 1.5rem;
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.9rem;
+        }
+        
+        .signup-link a {
+            color: var(--quantum-blue);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .signup-link a:hover {
+            text-shadow: 0 0 5px var(--quantum-blue);
+        }
+        
+        .quantum-animation {
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            border: 2px solid var(--quantum-blue);
+            border-radius: 50%;
+            top: -50px;
+            left: 50%;
+            transform: translateX(-50%);
+            opacity: 0.5;
+            animation: pulse 4s infinite ease-in-out;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: translateX(-50%) scale(1); opacity: 0.5; }
+            50% { transform: translateX(-50%) scale(1.1); opacity: 0.8; }
+        }
+    </style>
 </head>
 <body>
+    <!-- Quantum particles background -->
+    <div id="particles"></div>
+    
     <div class="container">
-        <h1>Sign In</h1>
+        <div class="quantum-animation"></div>
+        <h1>Quantum Sign In</h1>
+        
         <form action="/signin" method="POST">
             <div class="form-group">
-                <label for="username">Username:</label>
-                <input type="text" id="username" name="username" required><br><br>
+                <label for="username">Quantum ID:</label>
+                <input type="text" id="username" name="username" required placeholder="Enter your quantum identifier">
             </div>
             
             <div class="form-group">
-                <label for="password">Password:</label>
-                <input type="password" id="password" name="password" required><br><br>
+                <label for="password">Entangled Key:</label>
+                <input type="password" id="password" name="password" required placeholder="••••••••••">
             </div>
             
-            <button type="submit" class="btn">Sign In</button>
+            <button type="submit" class="btn">Authenticate</button>
         </form>
-        <p>Don't have an account? <a href="{{ url_for('signup') }}">Sign Up</a></p>
+        
+        <p class="signup-link">Not quantum registered? <a href="{{ url_for('signup') }}">Create Entanglement</a></p>
     </div>
+    
+    <script>
+        // Create quantum particles
+        document.addEventListener('DOMContentLoaded', function() {
+            const particlesContainer = document.getElementById('particles');
+            const particleCount = 20;
+            
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.classList.add('quantum-particle');
+                
+                // Random position
+                const x = Math.random() * 100;
+                const y = Math.random() * 100;
+                particle.style.left = `${x}vw`;
+                particle.style.top = `${y}vh`;
+                
+                // Random movement
+                const tx = (Math.random() - 0.5) * 100;
+                const ty = (Math.random() - 0.5) * 100;
+                particle.style.setProperty('--tx', `${tx}vw`);
+                particle.style.setProperty('--ty', `${ty}vh`);
+                
+                // Random size
+                const size = Math.random() * 3 + 1;
+                particle.style.width = `${size}px`;
+                particle.style.height = `${size}px`;
+                
+                // Random animation duration
+                const duration = Math.random() * 20 + 10;
+                particle.style.animationDuration = `${duration}s`;
+                
+                particlesContainer.appendChild(particle);
+            }
+        });
+    </script>
 </body>
 </html>

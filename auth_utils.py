@@ -77,8 +77,7 @@ def encrypt_with_key(data, key):
     """
     Encrypts data using the shared key from BB84.
     """
-    key_bytes = k
-    ey.encode()  # Convert key to bytes
+    key_bytes = key.encode('utf-8')  # Convert the string key to bytes
     encrypted_data = bytes([data[i] ^ key_bytes[i % len(key_bytes)] for i in range(len(data))])
     return encrypted_data
 

@@ -2,26 +2,306 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Sign Up</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quantum Entanglement Registration</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Roboto:wght@300;400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --quantum-blue: #0ff0fc;
+            --quantum-purple: #9d4edd;
+            --dark-space: #0d0d1a;
+            --neon-pink: #ff2a6d;
+            --particle-glow: rgba(157, 78, 221, 0.7);
+        }
+        
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Roboto', sans-serif;
+            background-color: var(--dark-space);
+            color: white;
+            overflow: hidden;
+            position: relative;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .quantum-particle {
+            position: absolute;
+            width: 3px;
+            height: 3px;
+            background-color: var(--quantum-blue);
+            border-radius: 50%;
+            filter: blur(1px);
+            animation: float 15s infinite linear;
+            opacity: 0.6;
+        }
+        
+        @keyframes float {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(var(--tx), var(--ty)); }
+        }
+        
+        .container {
+            position: relative;
+            z-index: 10;
+            width: 400px;
+            padding: 2.5rem;
+            background: rgba(13, 13, 26, 0.8);
+            border-radius: 15px;
+            box-shadow: 0 0 30px var(--particle-glow);
+            backdrop-filter: blur(5px);
+            border: 1px solid var(--quantum-purple);
+        }
+        
+        h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            color: var(--quantum-blue);
+            text-shadow: 0 0 10px var(--quantum-blue);
+            letter-spacing: 2px;
+            text-align: center;
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--quantum-blue);
+            font-size: 0.9rem;
+        }
+        
+        input {
+            width: 100%;
+            padding: 0.8rem;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid var(--quantum-purple);
+            border-radius: 5px;
+            color: white;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+        
+        input:focus {
+            outline: none;
+            border-color: var(--quantum-blue);
+            box-shadow: 0 0 10px var(--quantum-blue);
+        }
+        
+        .password-strength {
+            height: 4px;
+            background: rgba(255, 255, 255, 0.1);
+            margin-top: 0.5rem;
+            border-radius: 2px;
+            overflow: hidden;
+        }
+        
+        .strength-meter {
+            height: 100%;
+            width: 0;
+            background: var(--neon-pink);
+            transition: width 0.3s ease;
+        }
+        
+        .btn {
+            width: 100%;
+            padding: 1rem;
+            font-family: 'Orbitron', sans-serif;
+            background: linear-gradient(135deg, var(--quantum-purple), #6a3093);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            margin-top: 1rem;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px var(--particle-glow);
+        }
+        
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: 0.5s;
+        }
+        
+        .btn:hover::before {
+            left: 100%;
+        }
+        
+        .signin-link {
+            text-align: center;
+            margin-top: 1.5rem;
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.9rem;
+        }
+        
+        .signin-link a {
+            color: var(--quantum-blue);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .signin-link a:hover {
+            text-shadow: 0 0 5px var(--quantum-blue);
+        }
+        
+        .quantum-animation {
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            border: 2px solid var(--quantum-blue);
+            border-radius: 50%;
+            top: -50px;
+            left: 50%;
+            transform: translateX(-50%);
+            opacity: 0.5;
+            animation: pulse 4s infinite ease-in-out;
+        }
+        
+        .quantum-animation::after {
+            content: '';
+            position: absolute;
+            width: 80px;
+            height: 80px;
+            border: 2px solid var(--neon-pink);
+            border-radius: 50%;
+            top: 10px;
+            left: 10px;
+            opacity: 0.5;
+            animation: pulse 4s infinite ease-in-out reverse;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: translateX(-50%) scale(1); opacity: 0.5; }
+            50% { transform: translateX(-50%) scale(1.1); opacity: 0.8; }
+        }
+        
+        .quantum-terms {
+            margin-top: 1rem;
+            font-size: 0.8rem;
+            color: rgba(255, 255, 255, 0.5);
+        }
+        
+        .quantum-terms input {
+            width: auto;
+            margin-right: 0.5rem;
+        }
+    </style>
 </head>
 <body>
+    <!-- Quantum particles background -->
+    <div id="particles"></div>
+    
     <div class="container">
-        <h1>Sign Up</h1>
+        <div class="quantum-animation"></div>
+        <h1>Create Quantum Entanglement</h1>
+        
         <form action="/signup" method="POST">
             <div class="form-group">
-                <label for="username">Username:</label>
-                <input type="text" id="username" name="username" required><br><br>
+                <label for="username">Quantum Identifier:</label>
+                <input type="text" id="username" name="username" required placeholder="Enter your quantum alias">
             </div>
             
             <div class="form-group">
-                <label for="password">Password:</label>
-                <input type="password" id="password" name="password" required><br><br>
+                <label for="password">Superposition Key:</label>
+                <input type="password" id="password" name="password" required placeholder="Create quantum-resistant key" oninput="updateStrengthMeter()">
+                <div class="password-strength">
+                    <div class="strength-meter" id="strengthMeter"></div>
+                </div>
             </div>
             
-            <button type="submit" class="btn">Register</button>
+            <div class="quantum-terms">
+                <input type="checkbox" id="terms" name="terms" required>
+                <label for="terms">I accept the Quantum Entanglement Protocol</label>
+            </div>
+            
+            <button type="submit" class="btn">Initiate Entanglement</button>
         </form>
-        <p>Already have an account? <a href="{{ url_for('signin') }}">Sign In</a></p>
+        
+        <p class="signin-link">Already quantum entangled? <a href="{{ url_for('signin') }}">Authenticate</a></p>
     </div>
+    
+    <script>
+        // Create quantum particles
+        document.addEventListener('DOMContentLoaded', function() {
+            const particlesContainer = document.getElementById('particles');
+            const particleCount = 25;
+            
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.classList.add('quantum-particle');
+                
+                // Random position
+                const x = Math.random() * 100;
+                const y = Math.random() * 100;
+                particle.style.left = `${x}vw`;
+                particle.style.top = `${y}vh`;
+                
+                // Random movement
+                const tx = (Math.random() - 0.5) * 100;
+                const ty = (Math.random() - 0.5) * 100;
+                particle.style.setProperty('--tx', `${tx}vw`);
+                particle.style.setProperty('--ty', `${ty}vh`);
+                
+                // Random size
+                const size = Math.random() * 3 + 1;
+                particle.style.width = `${size}px`;
+                particle.style.height = `${size}px`;
+                
+                // Random animation duration
+                const duration = Math.random() * 20 + 10;
+                particle.style.animationDuration = `${duration}s`;
+                
+                particlesContainer.appendChild(particle);
+            }
+        });
+        
+        function updateStrengthMeter() {
+            const password = document.getElementById('password').value;
+            const meter = document.getElementById('strengthMeter');
+            let strength = 0;
+            
+            // Length check
+            if (password.length > 0) strength += 10;
+            if (password.length >= 8) strength += 20;
+            if (password.length >= 12) strength += 20;
+            
+            // Complexity checks
+            if (/[A-Z]/.test(password)) strength += 10;
+            if (/[0-9]/.test(password)) strength += 10;
+            if (/[^A-Za-z0-9]/.test(password)) strength += 10;
+            
+            // Update meter
+            meter.style.width = `${Math.min(strength, 100)}%`;
+            
+            // Update color based on strength
+            if (strength < 40) {
+                meter.style.background = '#ff2a6d'; // Weak (red)
+            } else if (strength < 70) {
+                meter.style.background = '#f0ff00'; // Medium (yellow)
+            } else {
+                meter.style.background = '#0ff0fc'; // Strong (quantum blue)
+            }
+        }
+    </script>
 </body>
 </html>
